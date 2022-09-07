@@ -53,6 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Shop(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
+    slug = models.SlugField(null=True)
     facebook = models.URLField()
     twitter = models.URLField()
     whatsapp = models.URLField()
@@ -69,6 +70,9 @@ class Shop(models.Model):
     address_city = models.CharField(max_length=255)
     address_zip = models.IntegerField()
     street_address = models.CharField(max_length=300)
+    
+    def __str__(self):
+            return self.name
       
     
     
