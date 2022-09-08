@@ -54,10 +54,10 @@ class Shop(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     slug = models.SlugField(null=True)
-    facebook = models.URLField()
-    twitter = models.URLField()
-    whatsapp = models.URLField()
-    instagram = models.URLField()
+    facebook = models.URLField(blank=True)
+    twitter = models.URLField(blank=True)
+    whatsapp = models.URLField(blank=True)
+    instagram = models.URLField(blank=True)
     about = models.TextField()
     banner = models.ImageField(upload_to='photos/%Y/%m/%d', blank=True)
     logo = models.ImageField(upload_to='photos/%Y/%m/%d', blank=True)
@@ -68,7 +68,7 @@ class Shop(models.Model):
     bank_name = models.CharField(max_length=255)
     address_country = models.CharField(max_length=255)
     address_city = models.CharField(max_length=255)
-    address_zip = models.IntegerField()
+    address_zip = models.IntegerField(blank=True)
     street_address = models.CharField(max_length=300)
     
     def __str__(self):

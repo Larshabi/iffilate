@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import Shop
+from .views import ShopCreate, ShopUpdate
 urlpatterns=[
-    path('shop/', Shop.as_view())
+    path('shop/', ShopCreate.as_view()),
+    path('shop/<slug:slug>/', ShopUpdate.as_view())
 ]
