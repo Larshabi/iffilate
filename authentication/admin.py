@@ -21,7 +21,7 @@ class MyUserAdmin(BaseUserAdmin):
     filter_horizontal = ()
     fieldsets = (
         (None, {'fields':('email', 'password',)}),
-        ('About', {'fields':('first_name', 'last_name',)}),
+        ('About', {'fields':('first_name', 'last_name', 'phone')}),
         ('Permissions', {'fields':('is_active', 'is_superuser', 'is_admin', 'is_staff',)})
     )
     
