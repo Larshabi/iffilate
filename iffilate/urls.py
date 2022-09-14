@@ -5,6 +5,7 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.conf import settings
 from django.conf.urls.static import static
+
 schema_view = get_schema_view(
     openapi.Info(
         title="Iffilate API",
@@ -23,5 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include('authentication.urls')),
     path('api/v1/auth/', include('djoser.urls')),
-    path('api/v1/auth/', include('djoser.urls.jwt'))
+    path('api/v1/auth/', include('djoser.urls.jwt')),
+    path('api/v1/auth/', include('djoser.social.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

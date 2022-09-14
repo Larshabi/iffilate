@@ -1,4 +1,5 @@
 from pathlib import Path
+from telnetlib import AUTHENTICATION
 from decouple import config
 from datetime import timedelta 
 import dj_database_url
@@ -34,10 +35,12 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'rest_framework',
     'drf_yasg',
-    
+    'corsheaders',
+   
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -46,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    
 ]
 
 ROOT_URLCONF = 'iffilate.urls'
@@ -146,7 +150,7 @@ CLOUDINARY_STORAGE={
     'API_KEY':config('API_KEY'),
     'API_SECRET':config('API_SECRET')    
 }
-
+white_list = ['http://localhost:8000/api/v1/auth/users/me']
 DJOSER = {
     'SEND_ACTIVATION_EMAIL': False,
     'ACTIVATION_URL':'/activate/{uid}/{token}',
@@ -154,6 +158,7 @@ DJOSER = {
     'USERNAME_RESET_CONFIRM_URL':'/username/reset/confirm/{uid}/{token}',
     'PASSWORD_RESET_CONFIRM_RETYPE':True,
     'PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND':True,
+    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': white_list
 }
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME':timedelta(hours=2),
@@ -184,3 +189,5 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME':timedelta(hours=2)
 }
 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_CLIENTID')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_SECRET')
