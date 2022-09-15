@@ -42,6 +42,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
+    billing_address = models.CharField(max_length=300, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now = True, null=True, blank=True)
     
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS= ["first_name", "last_name", "phone"]
@@ -71,6 +74,8 @@ class Shop(models.Model):
     address_city = models.CharField(max_length=255)
     address_zip = models.IntegerField(blank=True)
     street_address = models.CharField(max_length=300)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now = True, null=True, blank=True)
     
     def __str__(self):
             return self.name

@@ -14,7 +14,7 @@ class UserAdminChangeForm(forms.ModelForm):
     def clean_password(self):
         return self.initial["password"]
 
-class MyUserAdmin(BaseUserAdmin):
+class MyUserAdmin(admin.ModelAdmin):
     form = UserAdminChangeForm
     ordering = ["email"]
     list_display = ["email", "first_name", "last_name", "is_active"]
@@ -22,7 +22,7 @@ class MyUserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields':('email', 'password',)}),
         ('About', {'fields':('first_name', 'last_name', 'phone')}),
-        ('Permissions', {'fields':('is_active', 'is_superuser', 'is_admin', 'is_staff',)})
+        ('Permissions', {'fields':('is_active', 'is_superuser', 'is_admin', 'is_staff',)}),
     )
     
 admin.site.register(User, MyUserAdmin)
