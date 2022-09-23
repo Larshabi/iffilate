@@ -70,6 +70,7 @@ REST_FRAMEWORK = {
         'rest_framework.filters.SearchFilter', 
         'rest_framework.filters.OrderingFilter'
     ),
+    'EXCEPTION_HANDLER': 'utils.custom_exception_response.custom_exception_handler',
 }
 
 TEMPLATES = [
@@ -159,7 +160,7 @@ CLOUDINARY_STORAGE={
     'API_KEY':config('API_KEY'),
     'API_SECRET':config('API_SECRET')    
 }
-white_list = ['http://localhost:8000/api/v1/auth/users/me']
+white_list = ['http://localhost:8000/api/v1/auth/users/me','https://bucolic-travesseiro-b4154b.netlify.app/']
 DJOSER = {
     'SEND_ACTIVATION_EMAIL': False,
     'ACTIVATION_URL':'/activate/{uid}/{token}',
@@ -199,3 +200,36 @@ SIMPLE_JWT = {
 }
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_CLIENTID')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_SECRET')
+
+CORS_ALLOWED_ORIGINS = [
+# frontend
+"http://localhost:3000",# for nextjs localhost
+'https://bucolic-travesseiro-b4154b.netlify.app',
+'http://bucolic-travesseiro-b4154b.netlify.app',
+# backend
+"http://localhost:8000",
+'https://bucolic-travesseiro-b4154b.netlify.app'
+]
+
+CORS_ALLOW_METHODS = [
+'DELETE',
+'GET',
+'OPTIONS',
+'PATCH',
+'POST',
+'PUT',
+]
+
+CORS_ALLOW_HEADERS = [
+'accept',
+'accept-encoding',
+'authorization',
+'content-type',
+'dnt',
+'origin',
+'user-agent',
+'x-csrftoken',
+'x-requested-with',
+]
+
+CSRF_TRUSTED_ORIGINS =CORS_ALLOWED_ORIGINS
